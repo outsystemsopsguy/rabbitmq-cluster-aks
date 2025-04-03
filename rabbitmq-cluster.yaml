@@ -1,0 +1,25 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq
+  namespace: rabbitmq
+spec:
+  replicas: 3
+  image: rabbitmq:3.13.0
+  persistence:
+    storageClassName: "default"
+    storage: "10Gi"
+  rabbitmq:
+    additionalConfig: "cluster_formation.peer_discovery_backend = rabbit_peer_discovery_k8s"
+  override:
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: rabbitmq
+                env:
+                  - name: RABBITMQ_DEFAULT_USER
+                    value: "admin"
+                  - name: RABBITMQ_DEFAULT_PASS
+                    value: "rabbitmqpassword"
