@@ -16,6 +16,16 @@ spec:
       spec:
         template:
           spec:
+            affinity:
+              podAntiAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                  - labelSelector:
+                      matchExpressions:
+                        - key: app.kubernetes.io/name
+                          operator: In
+                          values:
+                            - rabbitmq
+                    topologyKey: "kubernetes.io/hostname"
             containers:
               - name: rabbitmq
                 env:
@@ -23,3 +33,4 @@ spec:
                     value: "admin"
                   - name: RABBITMQ_DEFAULT_PASS
                     value: "rabbitmqpassword"
+
