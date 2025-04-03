@@ -1,18 +1,14 @@
-﻿# Azure CLI commands to create the AKS cluster and deploy RabbitMQ
+# Azure CLI commands to create the AKS cluster and deploy RabbitMQ
 
 # Define variables
 $RESOURCE_GROUP = "yourresourcegroupnamehere"
-$LOCATION = "westeurope"
-$CLUSTER_NAME = "YourAKSClusterName"
+$CLUSTER_NAME = "rabbitmq"
 $NODE_COUNT = 3
 $ADMIN_USER = "admin"
 $ADMIN_PASSWORD = "rabbitmqpassword"
 $VHOST_NAME = "/outsystems"
 $RABBITMQ_VERSION = "3.13.0"
 
-
-# Create Resource Group
-az group create --name $RESOURCE_GROUP --location $LOCATION
 
 # Create AKS Cluster
 az aks create --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --node-count $NODE_COUNT --enable-managed-identity --generate-ssh-keys
